@@ -14,7 +14,10 @@ A library for running OSGi blueprint files in unit tests
 
     	@Test
     	public void testBlueprint() throws Exception {
-        	        // Do testing here
+    		Hello helloService = BlueprintHelper.getOsgiService(getBundleContext(), Hello.class);
+    	
+    		for(int i=0; i < 10; i++) {
+    			System.out.println("\t\t hello says: " + helloService.hello());
+    		}
     	}
-
 	}
