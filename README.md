@@ -21,3 +21,8 @@ A library for running OSGi blueprint files in unit tests
     		}
     	}
 	}
+
+
+References:
+
+Created an issue with Apache Aries to contribute the library back into Apache Aries upstream: https://issues.apache.org/jira/browse/ARIES-1592
