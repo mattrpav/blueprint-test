@@ -85,7 +85,7 @@ public class ObjectHelper {
      * Retrieves the given exception type from the exception.
      * <p/>
      * Is used to get the caused exception that typically have been wrapped in some sort
-     * of Camel wrapper exception
+     * of wrapper exception
      * <p/>
      * The strategy is to look in the exception hierarchy to find the first given cause that matches the type.
      * Will start from the bottom (the real cause) and walk upwards.

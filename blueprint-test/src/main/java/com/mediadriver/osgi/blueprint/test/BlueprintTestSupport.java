@@ -55,23 +55,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Base class for OSGi Blueprint unit tests with Camel.
+ * Base class for OSGi Blueprint unit tests.
  */
 public abstract class BlueprintTestSupport {
     protected Logger log = LoggerFactory.getLogger(getClass());
 
-    /** Name of a system property that sets camel context creation timeout. */
-    public static final String SPROP_BLUEPRINT_CONTEXT_CREATION_TIMEOUT = "com.mediadriver.osgi.test.blueprint.camelContextCreationTimeout";
+    /** Name of a system property that sets blueprint context creation timeout. */
+    public static final String SPROP_BLUEPRINT_CONTEXT_CREATION_TIMEOUT = "com.mediadriver.osgi.test.blueprint.blueprintContextCreationTimeout";
 
     private static ThreadLocal<BundleContext> threadLocalBundleContext = new ThreadLocal<BundleContext>();
     private volatile BundleContext bundleContext;
     private final Set<ServiceRegistration<?>> services = new LinkedHashSet<ServiceRegistration<?>>();
 
     /**
-     * Override this method if you don't want CamelBlueprintTestSupport create the test bundle
+     * Override this method if you don't want BlueprintTestSupport create the test bundle
      * @return includeTestBundle
-     * If the return value is true CamelBlueprintTestSupport creates the test bundle which includes blueprint configuration files
-     * If the return value is false CamelBlueprintTestSupport won't create the test bundle
+     * If the return value is true BlueprintTestSupport creates the test bundle which includes blueprint configuration files
+     * If the return value is false BlueprintTestSupport won't create the test bundle
      */
     protected boolean includeTestBundle() {
         return true;
@@ -208,8 +208,8 @@ public abstract class BlueprintTestSupport {
 
     @Before
     public void setUp() throws Exception {
-        System.setProperty("skipStartingCamelContext", "true");
-        System.setProperty("registerBlueprintCamelContextEager", "true");
+        System.setProperty("skipStartingBlueprintContext", "true");
+        System.setProperty("registerBlueprintContextEager", "true");
 
         String symbolicName = getClass().getSimpleName();
         if (isCreateBlueprintContextPerClass()) {
@@ -385,7 +385,7 @@ public abstract class BlueprintTestSupport {
      * Override to control whether {@link BlueprintContext} should be setup per test or per class.
      * <p/>
      * By default it will be setup/teardown per test (per test method). If you want to re-use
-     * {@link CamelContext} between test methods you can override this method and return <tt>true</tt>
+     * {@link BlueprintContext} between test methods you can override this method and return <tt>true</tt>
      * <p/>
      * <b>Important:</b> Use this with care as the {@link BlueprintContext} will carry over state
      * from previous tests, such as endpoints, components etc. So you cannot use this in all your tests.
@@ -412,7 +412,7 @@ public abstract class BlueprintTestSupport {
      * Return the location(s) of the bundle descriptors from the classpath.
      * Separate multiple locations by comma, or return a single location.
      * <p/>
-     * For example override this method and return <tt>OSGI-INF/blueprint/camel-context.xml</tt>
+     * For example override this method and return <tt>OSGI-INF/blueprint/blueprint.xml</tt>
      *
      * @return the location of the bundle descriptor file.
      */
@@ -450,7 +450,7 @@ public abstract class BlueprintTestSupport {
     }
     
     /**
-     * Returns how long to wait for Camel Context
+     * Returns how long to wait for Blueprint Context
      * to be created.
      * 
      * @return timeout in milliseconds.

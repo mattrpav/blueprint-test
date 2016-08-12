@@ -419,7 +419,7 @@ public final class BlueprintHelper {
                 .set("Bundle-Version", version)
                 .set("Bundle-Activator", TestBundleActivator.class.getName());
         if (configAdminInit != null) {
-            bundle.set("X-Camel-Blueprint-ConfigAdmin-Init", configAdminInit.toString());
+            bundle.set("X-Aries-Blueprint-ConfigAdmin-Init", configAdminInit.toString());
         }
         return bundle;
     }
@@ -564,7 +564,7 @@ public final class BlueprintHelper {
     public static class TestBundleActivator implements BundleActivator {
         @Override
         public void start(BundleContext bundleContext) throws Exception {
-            final String configAdminInit = bundleContext.getBundle().getHeaders().get("X-Camel-Blueprint-ConfigAdmin-Init");
+            final String configAdminInit = bundleContext.getBundle().getHeaders().get("X-Aries-Blueprint-ConfigAdmin-Init");
             if (configAdminInit != null) {
                 final BundleContext sysContext = bundleContext.getBundle(0).getBundleContext();
                 // we are started before blueprint.core and felix.configadmin
